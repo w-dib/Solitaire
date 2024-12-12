@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjh3esq84srg1"]
+
+[ext_resource type="Script" uid="uid://cqugrxx8jtsdi" path="res://scripts/card.gd" id="1_6u4wf"]
+[ext_resource type="Texture2D" uid="uid://b43rdkbdthg8" path="res://assets/images/kenney-playing-cards-pack/color_green_6.png" id="1_d81rb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d81rb"]
+size = Vector2(20, 28)
+
+[node name="Card" type="Area2D"]
+script = ExtResource("1_6u4wf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_d81rb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_d81rb")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
