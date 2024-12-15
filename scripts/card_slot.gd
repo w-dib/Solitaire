@@ -1,12 +1,17 @@
 extends Area2D
 
+class_name CardSlot
+
 signal card_entered
 signal card_exited
 
-func _on_area_entered(area: Area2D) -> void:
-	if area is Card:
-		card_entered.emit(self)
+var occupying_card: Card = null
 
-func _on_area_exited(area: Area2D) -> void:
-	if area is Card:
-		card_exited.emit(self)
+func _on_area_entered(card: Card) -> void:
+	if occupying_card != card:
+			card_entered.emit(self)
+
+func _on_area_exited(card: Card) -> void:
+	card_exited.emit(self)
+	if occupying_card == card:
+		occupying_card = null

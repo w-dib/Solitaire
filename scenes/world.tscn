@@ -1,9 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://1qyx1wpmkd06"]
+[gd_scene load_steps=8 format=3 uid="uid://1qyx1wpmkd06"]
 
 [ext_resource type="PackedScene" uid="uid://cjh3esq84srg1" path="res://scenes/card.tscn" id="1_nnsk1"]
 [ext_resource type="Texture2D" uid="uid://bcj3ceva01or" path="res://assets/images/background/green-background.jpg" id="2_rwgxs"]
 [ext_resource type="Script" uid="uid://bm7cwp01qoboh" path="res://scripts/card_manager.gd" id="3_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://bm1qf6f43x06s" path="res://scenes/card_slot.tscn" id="4_k0juu"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_k0juu"]
+load_path = "res://.godot/imported/card_clubs_03.png-f01615c65b08c502acb753d163209d8c.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_71j4m"]
+load_path = "res://.godot/imported/card_diamonds_K.png-6eaf652cc994c022a1face44b169ae78.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qfnet"]
+load_path = "res://.godot/imported/card_spades_04.png-7953fedaa2902722221fab3602c49527.ctex"
 
 [node name="World" type="Node"]
 
@@ -11,15 +20,36 @@
 texture = ExtResource("2_rwgxs")
 centered = false
 
+[node name="CardSlot2" parent="." instance=ExtResource("4_k0juu")]
+position = Vector2(120, 120)
+
+[node name="CardSlot3" parent="." instance=ExtResource("4_k0juu")]
+position = Vector2(120, 160)
+
 [node name="CardSlot" parent="." instance=ExtResource("4_k0juu")]
-position = Vector2(173, 111)
+position = Vector2(120, 80)
+
+[node name="Card3" parent="." instance=ExtResource("1_nnsk1")]
+position = Vector2(248, 136)
+card_picture = SubResource("CompressedTexture2D_k0juu")
 
 [node name="Card" parent="." instance=ExtResource("1_nnsk1")]
-position = Vector2(217, 105)
+position = Vector2(248, 72)
+card_picture = SubResource("CompressedTexture2D_71j4m")
+
+[node name="Card2" parent="." instance=ExtResource("1_nnsk1")]
+position = Vector2(248, 104)
+card_picture = SubResource("CompressedTexture2D_qfnet")
 
 [node name="CardManager" type="Node" parent="."]
 script = ExtResource("3_4wyf3")
 
+[connection signal="card_entered" from="CardSlot2" to="CardManager" method="_on_card_slot_card_entered"]
+[connection signal="card_exited" from="CardSlot2" to="CardManager" method="_on_card_slot_card_exited"]
+[connection signal="card_entered" from="CardSlot3" to="CardManager" method="_on_card_slot_card_entered"]
+[connection signal="card_exited" from="CardSlot3" to="CardManager" method="_on_card_slot_card_exited"]
 [connection signal="card_entered" from="CardSlot" to="CardManager" method="_on_card_slot_card_entered"]
 [connection signal="card_exited" from="CardSlot" to="CardManager" method="_on_card_slot_card_exited"]
-[connection signal="card_clicked" from="Card" to="CardManager" method="_on_card_card_clicked"]
+[connection signal="card_clicked" from="Card3" to="CardManager" method="_on_card_clicked"]
+[connection signal="card_clicked" from="Card" to="CardManager" method="_on_card_clicked"]
+[connection signal="card_clicked" from="Card2" to="CardManager" method="_on_card_clicked"]
