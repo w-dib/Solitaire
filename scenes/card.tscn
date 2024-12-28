@@ -1,9 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cjh3esq84srg1"]
 
 [ext_resource type="Script" uid="uid://cqugrxx8jtsdi" path="res://scripts/card.gd" id="1_6u4wf"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_d81rb"]
-load_path = "res://.godot/imported/color_green_6.png-ad48ecd95f79c6f38be8173bece70270.ctex"
+[ext_resource type="Texture2D" uid="uid://dggj2nvq2vnhe" path="res://assets/images/kenney-playing-cards-pack/card_back.png" id="2_6u4wf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d81rb"]
 size = Vector2(20, 28)
@@ -12,8 +10,10 @@ size = Vector2(20, 28)
 collision_mask = 3
 script = ExtResource("1_6u4wf")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("CompressedTexture2D_d81rb")
+[node name="face_down" type="Sprite2D" parent="."]
+texture = ExtResource("2_6u4wf")
+
+[node name="face_up" type="Sprite2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_d81rb")

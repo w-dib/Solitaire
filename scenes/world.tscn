@@ -1,45 +1,102 @@
-[gd_scene load_steps=8 format=3 uid="uid://1qyx1wpmkd06"]
+[gd_scene load_steps=10 format=3 uid="uid://1qyx1wpmkd06"]
 
-[ext_resource type="PackedScene" uid="uid://cjh3esq84srg1" path="res://scenes/card.tscn" id="1_nnsk1"]
 [ext_resource type="Texture2D" uid="uid://bcj3ceva01or" path="res://assets/images/background/green-background.jpg" id="2_rwgxs"]
 [ext_resource type="Script" uid="uid://bm7cwp01qoboh" path="res://scripts/card_manager.gd" id="3_4wyf3"]
-[ext_resource type="PackedScene" uid="uid://bm1qf6f43x06s" path="res://scenes/card_slot.tscn" id="4_k0juu"]
+[ext_resource type="Texture2D" uid="uid://df8i2aj0167w" path="res://assets/images/kenney-playing-cards-pack/card_spades_suit.png" id="5_7r4gi"]
+[ext_resource type="Script" uid="uid://cjh4eftbnfd66" path="res://scripts/card_spawner.gd" id="5_71j4m"]
+[ext_resource type="Texture2D" uid="uid://db55gj1uxpf4s" path="res://assets/images/kenney-playing-cards-pack/card_clubs_suit.png" id="6_w7kh3"]
+[ext_resource type="PackedScene" uid="uid://c7u2023nyf0po" path="res://scenes/pile_root.tscn" id="7_4mrxx"]
+[ext_resource type="Texture2D" uid="uid://bv6duwltksr8k" path="res://assets/images/kenney-playing-cards-pack/card_hearts_suit.png" id="7_e3hyu"]
+[ext_resource type="Texture2D" uid="uid://dn2e1wvw78mic" path="res://assets/images/kenney-playing-cards-pack/card_diamonds_suit.png" id="8_q5onr"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_k0juu"]
-load_path = "res://.godot/imported/card_clubs_03.png-f01615c65b08c502acb753d163209d8c.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_71j4m"]
-load_path = "res://.godot/imported/card_diamonds_K.png-6eaf652cc994c022a1face44b169ae78.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qfnet"]
-load_path = "res://.godot/imported/card_spades_04.png-7953fedaa2902722221fab3602c49527.ctex"
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jhx03"]
+size = Vector2(20, 28)
 
 [node name="World" type="Node"]
 
 [node name="Background" type="Sprite2D" parent="."]
 texture = ExtResource("2_rwgxs")
 centered = false
-
-[node name="CardSlot2" parent="." instance=ExtResource("4_k0juu")]
-position = Vector2(120, 120)
-
-[node name="CardSlot3" parent="." instance=ExtResource("4_k0juu")]
-position = Vector2(120, 160)
-
-[node name="CardSlot" parent="." instance=ExtResource("4_k0juu")]
-position = Vector2(120, 80)
+metadata/_edit_lock_ = true
 
 [node name="CardManager" type="Node2D" parent="."]
 script = ExtResource("3_4wyf3")
 
-[node name="Card3" parent="CardManager" instance=ExtResource("1_nnsk1")]
-position = Vector2(248, 136)
-card_picture = SubResource("CompressedTexture2D_k0juu")
+[node name="FoundationManager" type="Node2D" parent="."]
 
-[node name="Card" parent="CardManager" instance=ExtResource("1_nnsk1")]
-position = Vector2(248, 72)
-card_picture = SubResource("CompressedTexture2D_71j4m")
+[node name="Spades" type="Area2D" parent="FoundationManager"]
+position = Vector2(264, 24)
 
-[node name="Card2" parent="CardManager" instance=ExtResource("1_nnsk1")]
-position = Vector2(248, 104)
-card_picture = SubResource("CompressedTexture2D_qfnet")
+[node name="Sprite2D" type="Sprite2D" parent="FoundationManager/Spades"]
+modulate = Color(1, 1, 1, 0.117647)
+texture = ExtResource("5_7r4gi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FoundationManager/Spades"]
+shape = SubResource("RectangleShape2D_jhx03")
+
+[node name="Clubs" type="Area2D" parent="FoundationManager"]
+position = Vector2(296, 24)
+
+[node name="Sprite2D" type="Sprite2D" parent="FoundationManager/Clubs"]
+modulate = Color(1, 1, 1, 0.117647)
+texture = ExtResource("6_w7kh3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FoundationManager/Clubs"]
+shape = SubResource("RectangleShape2D_jhx03")
+
+[node name="Hearts" type="Area2D" parent="FoundationManager"]
+position = Vector2(328, 24)
+
+[node name="Sprite2D" type="Sprite2D" parent="FoundationManager/Hearts"]
+modulate = Color(1, 1, 1, 0.117647)
+texture = ExtResource("7_e3hyu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FoundationManager/Hearts"]
+shape = SubResource("RectangleShape2D_jhx03")
+
+[node name="Diamonds" type="Area2D" parent="FoundationManager"]
+position = Vector2(360, 24)
+
+[node name="Sprite2D" type="Sprite2D" parent="FoundationManager/Diamonds"]
+modulate = Color(1, 1, 1, 0.117647)
+texture = ExtResource("8_q5onr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FoundationManager/Diamonds"]
+shape = SubResource("RectangleShape2D_jhx03")
+
+[node name="StockManager" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="StockManager"]
+
+[node name="TableauManager" type="Node2D" parent="."]
+position = Vector2(24, 24)
+
+[node name="PileRoot" parent="TableauManager" instance=ExtResource("7_4mrxx")]
+position = Vector2(0, 56)
+
+[node name="PileRoot2" parent="TableauManager" instance=ExtResource("7_4mrxx")]
+position = Vector2(56, 56)
+
+[node name="PileRoot3" parent="TableauManager" instance=ExtResource("7_4mrxx")]
+position = Vector2(112, 56)
+
+[node name="PileRoot4" parent="TableauManager" instance=ExtResource("7_4mrxx")]
+position = Vector2(168, 56)
+
+[node name="PileRoot5" parent="TableauManager" instance=ExtResource("7_4mrxx")]
+position = Vector2(224, 56)
+
+[node name="PileRoot6" parent="TableauManager" instance=ExtResource("7_4mrxx")]
+position = Vector2(280, 56)
+
+[node name="PileRoot7" parent="TableauManager" instance=ExtResource("7_4mrxx")]
+position = Vector2(336, 56)
+
+[node name="CardSpawner" type="Node2D" parent="."]
+script = ExtResource("5_71j4m")
+
+[node name="StockPile" type="Marker2D" parent="CardSpawner"]
+position = Vector2(24, 24)
+
+[node name="DrawPile" type="Marker2D" parent="CardSpawner"]
+position = Vector2(56, 24)
