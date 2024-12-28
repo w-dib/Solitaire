@@ -77,11 +77,8 @@ position = Vector2(24, 24)
 collision_layer = 2
 collision_mask = 2
 
-[node name="Empty" type="Sprite2D" parent="StockManager/DrawPile"]
+[node name="Sprite2D" type="Sprite2D" parent="StockManager/DrawPile"]
 modulate = Color(1, 1, 1, 0.117647)
-texture = ExtResource("7_7r4gi")
-
-[node name="Full" type="Sprite2D" parent="StockManager/DrawPile"]
 texture = ExtResource("7_7r4gi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StockManager/DrawPile"]

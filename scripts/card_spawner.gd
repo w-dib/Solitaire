@@ -1,8 +1,10 @@
-extends Node
+extends Node2D
+
+signal spawned_cards
 
 @onready var card_folder_path := "res://assets/images/kenney-playing-cards-pack/"
 @onready var card_manager: Node2D = $"../CardManager"
-@onready var stock_pile: Marker2D = $StockPile
+@onready var stock_manager: Node2D = $"../StockManager"
 
 var card_names := [
 	"card_hearts_A", "card_hearts_02", "card_hearts_03", "card_hearts_04", "card_hearts_05", "card_hearts_06",
@@ -26,7 +28,8 @@ func spawn_cards() -> void:
 		card.name = card_name
 		connect_card_signals(card)
 		card_manager.add_child(card)
-		card.position = stock_pile.position
+		card.position = Vector2(-100, -100)
+	spawned_cards.emit()
 
 func connect_card_signals(card: Card) -> void:
 	card.connect("hovered_over", card_manager._on_hovered_over)
