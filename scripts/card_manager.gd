@@ -1,7 +1,5 @@
 extends Node2D
 
-signal draw_card
-
 @onready var screen_size := get_viewport_rect().size
 
 const CARD_COLLISION := 1
