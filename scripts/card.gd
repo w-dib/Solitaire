@@ -13,8 +13,14 @@ func _ready() -> void:
 	face_up.hide()
 	face_up.texture = texture
 
-func _on_mouse_entered() -> void:
-	hovered_over.emit(self)
+func _on_area_entered(area) -> void:
+	hovered_over.emit(area, self)
 
-func _on_mouse_exited() -> void:
-	hovered_off.emit(self)
+func _on_area_exited(area):
+	hovered_off.emit(area, self)
+
+#func _on_mouse_entered() -> void:
+	#hovered_over.emit(self)
+#
+#func _on_mouse_exited() -> void:
+	#hovered_off.emit(self)

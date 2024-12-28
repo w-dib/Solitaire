@@ -24,9 +24,6 @@ texture = ExtResource("2_rwgxs")
 centered = false
 metadata/_edit_lock_ = true
 
-[node name="CardManager" type="Node2D" parent="."]
-script = ExtResource("3_4wyf3")
-
 [node name="FoundationManager" type="Node2D" parent="."]
 
 [node name="Spades" type="Area2D" parent="FoundationManager"]
@@ -116,5 +113,8 @@ position = Vector2(336, 56)
 
 [node name="CardSpawner" type="Node2D" parent="."]
 script = ExtResource("5_71j4m")
+
+[node name="CardManager" type="Node2D" parent="."]
+script = ExtResource("3_4wyf3")
 
 [connection signal="input_event" from="StockManager/DrawPile" to="StockManager" method="_on_draw_pile_input_event"]

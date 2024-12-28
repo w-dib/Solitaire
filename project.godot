@@ -28,10 +28,6 @@ window/size/window_width_override=1980
 window/size/window_height_override=1080
 window/stretch/mode="canvas_items"
 
-[global_group]
-
-card_slot=""
-
 [input]
 
 Click={
