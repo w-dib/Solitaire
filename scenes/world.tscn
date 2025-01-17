@@ -1,30 +1,26 @@
-[gd_scene load_steps=13 format=3 uid="uid://1qyx1wpmkd06"]
+[gd_scene load_steps=7 format=3 uid="uid://1qyx1wpmkd06"]
 
 [ext_resource type="Texture2D" uid="uid://bcj3ceva01or" path="res://assets/images/background/green-background.jpg" id="2_rwgxs"]
-[ext_resource type="Script" uid="uid://bm7cwp01qoboh" path="res://scripts/card_manager.gd" id="3_4wyf3"]
 [ext_resource type="Texture2D" uid="uid://df8i2aj0167w" path="res://assets/images/kenney-playing-cards-pack/card_spades_suit.png" id="5_7r4gi"]
-[ext_resource type="Script" uid="uid://cjh4eftbnfd66" path="res://scripts/card_spawner.gd" id="5_71j4m"]
 [ext_resource type="Texture2D" uid="uid://db55gj1uxpf4s" path="res://assets/images/kenney-playing-cards-pack/card_clubs_suit.png" id="6_w7kh3"]
-[ext_resource type="PackedScene" uid="uid://c7u2023nyf0po" path="res://scenes/pile_root.tscn" id="7_4mrxx"]
-[ext_resource type="Texture2D" uid="uid://bxomhg5roo1si" path="res://assets/images/kenney-playing-cards-pack/color_green_empty.png" id="7_7r4gi"]
 [ext_resource type="Texture2D" uid="uid://bv6duwltksr8k" path="res://assets/images/kenney-playing-cards-pack/card_hearts_suit.png" id="7_e3hyu"]
-[ext_resource type="Script" uid="uid://bdp7ym61qldl2" path="res://scripts/stock_manager.gd" id="7_w7kh3"]
 [ext_resource type="Texture2D" uid="uid://dn2e1wvw78mic" path="res://assets/images/kenney-playing-cards-pack/card_diamonds_suit.png" id="8_q5onr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jhx03"]
 size = Vector2(20, 28)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_w7kh3"]
-size = Vector2(20, 28)
-
 [node name="World" type="Node"]
 
 [node name="Background" type="Sprite2D" parent="."]
+visible = false
+z_index = -1
 texture = ExtResource("2_rwgxs")
 centered = false
 metadata/_edit_lock_ = true
 
 [node name="FoundationManager" type="Node2D" parent="."]
+visible = false
+metadata/_edit_lock_ = true
 
 [node name="Spades" type="Area2D" parent="FoundationManager"]
 position = Vector2(264, 24)
@@ -66,55 +62,4 @@ texture = ExtResource("8_q5onr")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FoundationManager/Diamonds"]
 shape = SubResource("RectangleShape2D_jhx03")
 
-[node name="StockManager" type="Node2D" parent="."]
-script = ExtResource("7_w7kh3")
-
-[node name="DrawPile" type="Area2D" parent="StockManager"]
-position = Vector2(24, 24)
-collision_layer = 2
-collision_mask = 2
-
-[node name="Empty" type="Sprite2D" parent="StockManager/DrawPile"]
-modulate = Color(1, 1, 1, 0.117647)
-texture = ExtResource("7_7r4gi")
-
-[node name="Full" type="Sprite2D" parent="StockManager/DrawPile"]
-texture = ExtResource("7_7r4gi")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StockManager/DrawPile"]
-shape = SubResource("RectangleShape2D_w7kh3")
-
-[node name="Stockpile" type="Marker2D" parent="StockManager"]
-position = Vector2(56, 24)
-
-[node name="TableauManager" type="Node2D" parent="."]
-position = Vector2(24, 24)
-
-[node name="PileRoot" parent="TableauManager" instance=ExtResource("7_4mrxx")]
-position = Vector2(0, 56)
-
-[node name="PileRoot2" parent="TableauManager" instance=ExtResource("7_4mrxx")]
-position = Vector2(56, 56)
-
-[node name="PileRoot3" parent="TableauManager" instance=ExtResource("7_4mrxx")]
-position = Vector2(112, 56)
-
-[node name="PileRoot4" parent="TableauManager" instance=ExtResource("7_4mrxx")]
-position = Vector2(168, 56)
-
-[node name="PileRoot5" parent="TableauManager" instance=ExtResource("7_4mrxx")]
-position = Vector2(224, 56)
-
-[node name="PileRoot6" parent="TableauManager" instance=ExtResource("7_4mrxx")]
-position = Vector2(280, 56)
-
-[node name="PileRoot7" parent="TableauManager" instance=ExtResource("7_4mrxx")]
-position = Vector2(336, 56)
-
-[node name="CardSpawner" type="Node2D" parent="."]
-script = ExtResource("5_71j4m")
-
-[node name="CardManager" type="Node2D" parent="."]
-script = ExtResource("3_4wyf3")
-
-[connection signal="input_event" from="StockManager/DrawPile" to="StockManager" method="_on_draw_pile_input_event"]
+[node name="Cards" type="Node2D" parent="."]

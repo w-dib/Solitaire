@@ -40,6 +40,7 @@ func _raycast_at_card() -> Card:
 	parameters.position = get_global_mouse_position()
 	parameters.collide_with_areas = true
 	parameters.collision_mask = CARD_COLLISION
+
 	var result := space_state.intersect_point(parameters)
 	if result.size() > 0:
 		return result[0].collider

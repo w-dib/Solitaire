@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cjh3esq84srg1"]
+[gd_scene load_steps=5 format=3 uid="uid://cjh3esq84srg1"]
 
 [ext_resource type="Script" uid="uid://cqugrxx8jtsdi" path="res://scripts/card.gd" id="1_6u4wf"]
 [ext_resource type="Texture2D" uid="uid://dggj2nvq2vnhe" path="res://assets/images/kenney-playing-cards-pack/card_back.png" id="2_6u4wf"]
+[ext_resource type="Texture2D" uid="uid://byb64r7pruy3s" path="res://assets/images/empty-card-slot/empty-slot.png" id="3_ktuci"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d81rb"]
 size = Vector2(20, 28)
@@ -11,9 +12,13 @@ collision_mask = 3
 script = ExtResource("1_6u4wf")
 
 [node name="face_down" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 texture = ExtResource("2_6u4wf")
 
 [node name="face_up" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+texture = ExtResource("3_ktuci")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_d81rb")
