@@ -72,7 +72,13 @@ position = Vector2(36, 24)
 script = ExtResource("6_i7141")
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="DrawPile"]
+[node name="PileFull" type="Sprite2D" parent="DrawPile"]
+unique_name_in_owner = true
+texture = ExtResource("6_qfnet")
+
+[node name="PileEmpty" type="Sprite2D" parent="DrawPile"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.235294)
 texture = ExtResource("6_qfnet")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DrawPile"]
