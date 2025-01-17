@@ -35,6 +35,9 @@ var is_dragging := false
 @onready var face_down: Sprite2D = %face_down
 @onready var face_up: Sprite2D = %face_up
 
+#Get screen dimensions to clamp cards within screen
+@onready var screen_size := get_viewport_rect().size
+
 # Texture paths
 var front_texture_path: String
 var back_texture_path: String = "res://assets/images/kenney-playing-cards-pack/card_back.png"
@@ -45,7 +48,18 @@ func _ready() -> void:
 
 func _process(delta):
 	if is_dragging:
-		global_position = get_global_mouse_position() - click_position
+		# Get the mouse's current global position
+		var mouse_pos = get_global_mouse_position()
+		
+		# Calculate the new global position of the card
+		var new_position = mouse_pos - click_position
+		
+		# Clamp the new position to be within the screen bounds
+		new_position.x = clamp(new_position.x, 0, screen_size.x)
+		new_position.y = clamp(new_position.y, 0, screen_size.y)
+		
+		# Apply the clamped position
+		global_position = new_position
 
 func show_front() -> void:
 	face_up.visible = true
