@@ -27,6 +27,10 @@ var suit: CardSuit
 var color: CardColor
 var rank: CardRank
 
+# Variables for card movement
+var click_position := Vector2.ZERO
+var is_dragging := false
+
 # References to Sprite2D nodes
 @onready var face_down: Sprite2D = %face_down
 @onready var face_up: Sprite2D = %face_up
@@ -39,6 +43,10 @@ func _ready() -> void:
 	# Initialize the card to show back
 	show_back()
 
+func _process(delta):
+	if is_dragging:
+		global_position = get_global_mouse_position() - click_position
+
 func show_front() -> void:
 	face_up.visible = true
 	face_down.visible = false
@@ -46,6 +54,29 @@ func show_front() -> void:
 func show_back() -> void:
 	face_up.visible = false
 	face_down.visible = true
+	
+func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event.is_action_pressed("Click"):
+		var parameters: PhysicsPointQueryParameters2D = PhysicsPointQueryParameters2D.new()
+		parameters.position = event.position
+		parameters.collide_with_areas = true	
+		var objects_clicked = get_world_2d().direct_space_state.intersect_point(parameters)
+		var colliders = objects_clicked.map(
+			func(dict):
+				return dict.collider
+		)
+		
+		colliders.sort_custom(
+			func(collider_1, collider_2):
+				return collider_1.z_index < collider_2.z_index
+		)
+		if colliders[-1] == self:
+			is_dragging = true
+			click_position = get_local_mouse_position()
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_released("Click"):
+		is_dragging = false
 
 func set_card_properties(texture_name: String) -> void:
 	# Parse texture_name to set suit, color, and rank using begins_with
