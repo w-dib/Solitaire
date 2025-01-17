@@ -67,7 +67,6 @@ func set_card_properties(texture_name: String) -> void:
 	
 	# Extract rank from texture_name
 	var rank_str: String = texture_name.get_slice("_", 2)
-	print("Extracted rank_str:", rank_str)
 	rank = parse_rank(rank_str)
 	
 	if rank == 100:

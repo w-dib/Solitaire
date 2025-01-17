@@ -3,7 +3,7 @@ extends Node2D
 
 # The card scene to be duplicated for all cards in the deck
 var card_scene: PackedScene = preload("res://scenes/card.tscn")
-
+var drawpile_z_index := 0
 # Arrays to manage card locations with type annotations
 var all_cards: Array[Card] = []
 
@@ -25,7 +25,7 @@ var tableau_piles: Array = [
 ]
 
 var draw_pile: Array[Card] = []
-var discard_pile: Array[Card] = []
+var stock_pile: Array[Card] = []
 
 # Array of card texture names
 var card_names: Array[String] = [
@@ -48,11 +48,20 @@ func initialize_deck() -> void:
 		# Add card_instance to the scene tree
 		add_child(card_instance)
 		card_instance.set_card_properties(texture_name)
-		print("Card instance node tree:")
 		
 		all_cards.append(card_instance)
 		draw_pile.append(card_instance)
-		
+		shuffle_deck(draw_pile)
 		
 		# Assign initial position off-screen or to a designated area
-		card_instance.position = Vector2(100, 100)  # Placeholder position
+		card_instance.position = Vector2(-100, -100)  # Placeholder position
+		
+func shuffle_deck(deck: Array) -> void:
+	deck.shuffle()
+
+func draw_card() -> Card:
+	var drawn_card = draw_pile.pop_back() as Card
+	stock_pile.append(drawn_card)
+	drawn_card.z_index = drawpile_z_index
+	drawpile_z_index += 1
+	return drawn_card
