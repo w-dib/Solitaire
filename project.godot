@@ -43,8 +43,8 @@ Click={
 [layer_names]
 
 2d_physics/layer_1="Card"
-2d_physics/layer_2="Drawpile"
-2d_physics/layer_3="EmptySlot"
+2d_physics/layer_2="Foundation"
+2d_physics/layer_3="Tableau"
 
 [rendering]
 

@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://1qyx1wpmkd06"]
+[gd_scene load_steps=11 format=3 uid="uid://1qyx1wpmkd06"]
 
+[ext_resource type="Script" uid="uid://bcbuoivlk1lbv" path="res://scripts/foundation.gd" id="2_4mrxx"]
 [ext_resource type="Texture2D" uid="uid://bcj3ceva01or" path="res://assets/images/background/green-background.jpg" id="2_rwgxs"]
 [ext_resource type="Texture2D" uid="uid://df8i2aj0167w" path="res://assets/images/kenney-playing-cards-pack/card_spades_suit.png" id="5_7r4gi"]
 [ext_resource type="Script" uid="uid://dh42lcumtk5pe" path="res://scripts/draw_pile.gd" id="6_i7141"]
@@ -27,6 +28,9 @@ metadata/_edit_lock_ = true
 
 [node name="Spades" type="Area2D" parent="Foundations" groups=["Foundation"]]
 position = Vector2(264, 24)
+collision_layer = 6
+script = ExtResource("2_4mrxx")
+SUIT = "SPADES"
 
 [node name="Sprite2D" type="Sprite2D" parent="Foundations/Spades"]
 modulate = Color(1, 1, 1, 0.392157)
@@ -37,6 +41,9 @@ shape = SubResource("RectangleShape2D_jhx03")
 
 [node name="Clubs" type="Area2D" parent="Foundations" groups=["Foundation"]]
 position = Vector2(296, 24)
+collision_layer = 6
+script = ExtResource("2_4mrxx")
+SUIT = "CLUBS"
 
 [node name="Sprite2D" type="Sprite2D" parent="Foundations/Clubs"]
 modulate = Color(1, 1, 1, 0.392157)
@@ -47,6 +54,9 @@ shape = SubResource("RectangleShape2D_jhx03")
 
 [node name="Hearts" type="Area2D" parent="Foundations" groups=["Foundation"]]
 position = Vector2(328, 24)
+collision_layer = 6
+script = ExtResource("2_4mrxx")
+SUIT = "HEARTS"
 
 [node name="Sprite2D" type="Sprite2D" parent="Foundations/Hearts"]
 modulate = Color(1, 1, 1, 0.392157)
@@ -57,6 +67,9 @@ shape = SubResource("RectangleShape2D_jhx03")
 
 [node name="Diamonds" type="Area2D" parent="Foundations" groups=["Foundation"]]
 position = Vector2(360, 24)
+collision_layer = 6
+script = ExtResource("2_4mrxx")
+SUIT = "DIAMONDS"
 
 [node name="Sprite2D" type="Sprite2D" parent="Foundations/Diamonds"]
 modulate = Color(1, 1, 1, 0.392157)

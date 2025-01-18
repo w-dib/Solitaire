@@ -47,7 +47,7 @@ func _ready() -> void:
 	# Initialize the card to show back
 	show_back()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if is_dragging:
 		# Get the mouse's current global position
 		var mouse_pos := get_global_mouse_position()
@@ -72,31 +72,57 @@ func show_back() -> void:
 	
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_action_pressed("Click"):
-		initial_position = global_position
-		var parameters: PhysicsPointQueryParameters2D = PhysicsPointQueryParameters2D.new()
-		parameters.position = event.position
-		parameters.collide_with_areas = true	
-		var objects_clicked := get_world_2d().direct_space_state.intersect_point(parameters)
-		var colliders := objects_clicked.map(
-			func(dict: Dictionary):
-				return dict.collider
-		)
-		
-		colliders.sort_custom(
-			func(collider_1, collider_2):
-				return collider_1.z_index < collider_2.z_index
-		)
-		if colliders[-1] == self:
-			is_dragging = true
-			click_position = get_local_mouse_position()
+		pick_up_card(event)
 	
 	if event.is_action_released("Click"):
-		global_position = initial_position
-		initial_position = Vector2.ZERO
+		drop_card(event)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_released("Click"):
 		is_dragging = false
+
+func pick_up_card(event: InputEvent) -> void:
+	initial_position = global_position
+	var objects_clicked := mouse_raycast(event, 0b1)
+	var colliders := objects_clicked.map(
+		func(dict: Dictionary):
+			return dict.collider
+	)
+	
+	colliders.sort_custom(
+		func(collider_1, collider_2):
+			return collider_1.z_index < collider_2.z_index
+	)
+	if colliders[-1] == self:
+		is_dragging = true
+		click_position = get_local_mouse_position()
+
+func drop_card(event: InputEvent) -> void:
+	var object := mouse_raycast(event, 0b110) #layers 2 & 3 in bitmask.
+	# Assume no valid drop by default
+	var valid_drop := false
+	
+	# Check if there are any results from the raycast
+	if object.size() > 0:
+		var first_dict = object[0]  # Get the first dictionary
+		if "collider" in first_dict:
+			var collider = first_dict["collider"]  # Safely access the collider
+			if collider.is_in_group("Foundation"):
+				valid_drop = true
+				# Perform the valid drop logic here
+	
+	if not valid_drop:
+		global_position = initial_position
+		initial_position = Vector2.ZERO
+
+func mouse_raycast(event: InputEvent, layer: int) -> Array[Dictionary]:
+	var parameters: PhysicsPointQueryParameters2D = PhysicsPointQueryParameters2D.new()
+	parameters.position = event.position
+	parameters.collide_with_areas = true
+	# Set the collision layer mask to detect relevant layers
+	parameters.collision_mask = layer
+	var objects_clicked := get_world_2d().direct_space_state.intersect_point(parameters)
+	return objects_clicked
 
 func set_card_properties(texture_name: String) -> void:
 	# Parse texture_name to set suit, color, and rank using begins_with
