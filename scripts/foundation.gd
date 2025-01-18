@@ -12,4 +12,10 @@ func _ready() -> void:
 		
 func _on_entered_foundation(card: Card, foundation: Area2D) -> void:
 	if foundation == self:
-		print(card.suit)
+		if card.suit == suit:
+			print(card.suit)
+			print(suit)
+			card.global_position = global_position
+		else:
+			card.global_position = card.initial_position
+			card.initial_position = Vector2.ZERO

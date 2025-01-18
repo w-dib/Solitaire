@@ -101,8 +101,6 @@ func pick_up_card(event: InputEvent) -> void:
 
 func drop_card(event: InputEvent) -> void:
 	var object := mouse_raycast(event, 0b110) #layers 2 & 3 in bitmask.
-	# Assume no valid drop by default
-	var valid_drop := false
 	
 	# Check if there are any results from the raycast
 	if object.size() > 0:
@@ -110,16 +108,15 @@ func drop_card(event: InputEvent) -> void:
 		if "collider" in first_dict:
 			var collider: Area2D = first_dict["collider"]  # Safely access the collider
 			if collider.is_in_group("Foundation"):
-				#valid_drop = true <--- CHANGE THIS WHEN DONE TESTING
+
 				entered_foundation.emit(self, collider)
 				
-			if collider.is_in_group("Tableau"):
-				valid_drop = true
-				entered_tableau.emit(self, collider)
-				
-	if not valid_drop:
-		global_position = initial_position
-		initial_position = Vector2.ZERO
+			#if collider.is_in_group("Tableau"):
+				#valid_drop = true
+				#entered_tableau.emit(self, collider)
+			else:
+				global_position = initial_position
+				initial_position = Vector2.ZERO
 
 func mouse_raycast(event: InputEvent, layer: int) -> Array[Dictionary]:
 	var parameters: PhysicsPointQueryParameters2D = PhysicsPointQueryParameters2D.new()
