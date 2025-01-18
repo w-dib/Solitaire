@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://1qyx1wpmkd06"]
+[gd_scene load_steps=12 format=3 uid="uid://1qyx1wpmkd06"]
 
 [ext_resource type="Script" uid="uid://bcbuoivlk1lbv" path="res://scripts/foundation.gd" id="2_4mrxx"]
 [ext_resource type="Texture2D" uid="uid://bcj3ceva01or" path="res://assets/images/background/green-background.jpg" id="2_rwgxs"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://db55gj1uxpf4s" path="res://assets/images/kenney-playing-cards-pack/card_clubs_suit.png" id="6_w7kh3"]
 [ext_resource type="Texture2D" uid="uid://bv6duwltksr8k" path="res://assets/images/kenney-playing-cards-pack/card_hearts_suit.png" id="7_e3hyu"]
 [ext_resource type="Texture2D" uid="uid://dn2e1wvw78mic" path="res://assets/images/kenney-playing-cards-pack/card_diamonds_suit.png" id="8_q5onr"]
+[ext_resource type="PackedScene" uid="uid://c7u2023nyf0po" path="res://scenes/tableau_pile.tscn" id="9_7r4gi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jhx03"]
 size = Vector2(20, 28)
@@ -100,5 +101,28 @@ shape = SubResource("RectangleShape2D_i7141")
 [node name="Stockpile" type="Marker2D" parent="DrawPile"]
 unique_name_in_owner = true
 position = Vector2(32, 0)
+
+[node name="TableauPiles" type="Node2D" parent="."]
+
+[node name="TableauPile" parent="TableauPiles" groups=["Tableau"] instance=ExtResource("9_7r4gi")]
+position = Vector2(36, 72)
+
+[node name="TableauPile2" parent="TableauPiles" groups=["Tableau"] instance=ExtResource("9_7r4gi")]
+position = Vector2(90, 72)
+
+[node name="TableauPile3" parent="TableauPiles" groups=["Tableau"] instance=ExtResource("9_7r4gi")]
+position = Vector2(144, 72)
+
+[node name="TableauPile4" parent="TableauPiles" groups=["Tableau"] instance=ExtResource("9_7r4gi")]
+position = Vector2(198, 72)
+
+[node name="TableauPile5" parent="TableauPiles" groups=["Tableau"] instance=ExtResource("9_7r4gi")]
+position = Vector2(252, 72)
+
+[node name="TableauPile6" parent="TableauPiles" groups=["Tableau"] instance=ExtResource("9_7r4gi")]
+position = Vector2(306, 72)
+
+[node name="TableauPile7" parent="TableauPiles" groups=["Tableau"] instance=ExtResource("9_7r4gi")]
+position = Vector2(360, 72)
 
 [connection signal="input_event" from="DrawPile" to="DrawPile" method="_on_input_event"]

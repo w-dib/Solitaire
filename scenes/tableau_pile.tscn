@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hultt"]
 size = Vector2(20, 28)
 
-[node name="PileRoot" type="Area2D"]
+[node name="TableauPile" type="Area2D"]
 collision_layer = 2
 script = ExtResource("1_hultt")
 
