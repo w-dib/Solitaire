@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c7u2023nyf0po"]
 
 [ext_resource type="Texture2D" uid="uid://bxomhg5roo1si" path="res://assets/images/kenney-playing-cards-pack/color_green_empty.png" id="1_4su8v"]
-[ext_resource type="Script" uid="uid://cb3dhqnpxiu5j" path="res://scripts/pile_root.gd" id="1_hultt"]
+[ext_resource type="Script" uid="uid://cb3dhqnpxiu5j" path="res://scripts/tableau_pile.gd" id="1_hultt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hultt"]
 size = Vector2(20, 28)

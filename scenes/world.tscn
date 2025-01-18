@@ -28,10 +28,11 @@ metadata/_edit_lock_ = true
 metadata/_edit_lock_ = true
 
 [node name="Spades" type="Area2D" parent="Foundations" groups=["Foundation"]]
-position = Vector2(264, 24)
+position = Vector2(198, 24)
 collision_layer = 6
 script = ExtResource("2_4mrxx")
-SUIT = "SPADES"
+suit = 2
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Foundations/Spades"]
 modulate = Color(1, 1, 1, 0.392157)
@@ -41,10 +42,11 @@ texture = ExtResource("5_7r4gi")
 shape = SubResource("RectangleShape2D_jhx03")
 
 [node name="Clubs" type="Area2D" parent="Foundations" groups=["Foundation"]]
-position = Vector2(296, 24)
+position = Vector2(252, 24)
 collision_layer = 6
 script = ExtResource("2_4mrxx")
-SUIT = "CLUBS"
+suit = 3
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Foundations/Clubs"]
 modulate = Color(1, 1, 1, 0.392157)
@@ -54,10 +56,10 @@ texture = ExtResource("6_w7kh3")
 shape = SubResource("RectangleShape2D_jhx03")
 
 [node name="Hearts" type="Area2D" parent="Foundations" groups=["Foundation"]]
-position = Vector2(328, 24)
+position = Vector2(306, 24)
 collision_layer = 6
 script = ExtResource("2_4mrxx")
-SUIT = "HEARTS"
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Foundations/Hearts"]
 modulate = Color(1, 1, 1, 0.392157)
@@ -70,7 +72,8 @@ shape = SubResource("RectangleShape2D_jhx03")
 position = Vector2(360, 24)
 collision_layer = 6
 script = ExtResource("2_4mrxx")
-SUIT = "DIAMONDS"
+suit = 1
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Foundations/Diamonds"]
 modulate = Color(1, 1, 1, 0.392157)

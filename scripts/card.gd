@@ -1,7 +1,9 @@
 # card.gd
 extends Area2D
-
 class_name Card
+
+signal entered_foundation
+signal entered_tableau
 
 # Enums for Suit, Color, and Rank
 enum CardColor { RED, BLACK }
@@ -90,7 +92,7 @@ func pick_up_card(event: InputEvent) -> void:
 	)
 	
 	colliders.sort_custom(
-		func(collider_1, collider_2):
+		func(collider_1: Area2D, collider_2: Area2D):
 			return collider_1.z_index < collider_2.z_index
 	)
 	if colliders[-1] == self:
@@ -104,13 +106,17 @@ func drop_card(event: InputEvent) -> void:
 	
 	# Check if there are any results from the raycast
 	if object.size() > 0:
-		var first_dict = object[0]  # Get the first dictionary
+		var first_dict := object[0]  # Get the first dictionary
 		if "collider" in first_dict:
-			var collider = first_dict["collider"]  # Safely access the collider
+			var collider: Area2D = first_dict["collider"]  # Safely access the collider
 			if collider.is_in_group("Foundation"):
+				#valid_drop = true <--- CHANGE THIS WHEN DONE TESTING
+				entered_foundation.emit(self, collider)
+				
+			if collider.is_in_group("Tableau"):
 				valid_drop = true
-				# Perform the valid drop logic here
-	
+				entered_tableau.emit(self, collider)
+				
 	if not valid_drop:
 		global_position = initial_position
 		initial_position = Vector2.ZERO
