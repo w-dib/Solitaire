@@ -29,6 +29,7 @@ var rank: CardRank
 
 # Variables for card movement
 var click_position := Vector2.ZERO
+var initial_position := Vector2.ZERO
 var is_dragging := false
 
 # References to Sprite2D nodes
@@ -46,13 +47,13 @@ func _ready() -> void:
 	# Initialize the card to show back
 	show_back()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if is_dragging:
 		# Get the mouse's current global position
-		var mouse_pos = get_global_mouse_position()
+		var mouse_pos := get_global_mouse_position()
 		
 		# Calculate the new global position of the card
-		var new_position = mouse_pos - click_position
+		var new_position := mouse_pos - click_position
 		
 		# Clamp the new position to be within the screen bounds
 		new_position.x = clamp(new_position.x, 0, screen_size.x)
@@ -69,14 +70,15 @@ func show_back() -> void:
 	face_up.visible = false
 	face_down.visible = true
 	
-func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_action_pressed("Click"):
+		initial_position = global_position
 		var parameters: PhysicsPointQueryParameters2D = PhysicsPointQueryParameters2D.new()
 		parameters.position = event.position
 		parameters.collide_with_areas = true	
-		var objects_clicked = get_world_2d().direct_space_state.intersect_point(parameters)
-		var colliders = objects_clicked.map(
-			func(dict):
+		var objects_clicked := get_world_2d().direct_space_state.intersect_point(parameters)
+		var colliders := objects_clicked.map(
+			func(dict: Dictionary):
 				return dict.collider
 		)
 		
@@ -87,6 +89,10 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 		if colliders[-1] == self:
 			is_dragging = true
 			click_position = get_local_mouse_position()
+	
+	if event.is_action_released("Click"):
+		global_position = initial_position
+		initial_position = Vector2.ZERO
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_released("Click"):

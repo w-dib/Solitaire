@@ -1,9 +1,6 @@
 # board_state.gd
 extends Node2D
 
-signal on_drawpile_empty
-signal on_drawpile_full
-
 # The card scene to be duplicated for all cards in the deck
 var card_scene: PackedScene = preload("res://scenes/card.tscn")
 var drawpile_z_index := 0
@@ -63,35 +60,14 @@ func initialize_deck() -> void:
 func shuffle_deck(deck: Array) -> void:
 	deck.shuffle()
 
-func draw_card() -> Card:
-	if draw_pile.size() == 0:
-		restock()
-		return
-	else:
-		on_drawpile_full.emit()
-		var drawn_card: Card = draw_pile.pop_back() as Card
-		stock_pile.append(drawn_card)
-		drawn_card.z_index = drawpile_z_index
-		drawn_card.show_front()
-		drawpile_z_index += 1
-		return drawn_card
-	
-func restock() -> void:
-	print("Before restock:")
-	print("Stock pile size:", stock_pile.size())
-	print("Draw pile size:", draw_pile.size())
-
-	on_drawpile_empty.emit()
-	
-	draw_pile = stock_pile.duplicate()
-	draw_pile.reverse()
-	stock_pile.clear()
-	
-	for card in draw_pile:
-		card.z_index = 0
-		card.show_back()
-		card.position = Vector2(-100, -100)
-
-	print("After restock:")
-	print("Stock pile size:", stock_pile.size())
-	print("Draw pile size:", draw_pile.size())
+#identify which pile the card being dragged is in
+func find_pile(card: Card) -> String:
+	if card in stock_pile:
+		return "stock_pile"
+	for i in range(foundations.size()):
+		if card in foundations[i]:
+			return "foundation_%d" % i
+	for i in range(tableau_piles.size()):
+		if card in tableau_piles[i]:
+			return "tableau_%d" % i
+	return ""  # Card not found

@@ -25,7 +25,7 @@ metadata/_edit_lock_ = true
 [node name="Foundations" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
 
-[node name="Spades" type="Area2D" parent="Foundations"]
+[node name="Spades" type="Area2D" parent="Foundations" groups=["Foundation"]]
 position = Vector2(264, 24)
 
 [node name="Sprite2D" type="Sprite2D" parent="Foundations/Spades"]
@@ -35,7 +35,7 @@ texture = ExtResource("5_7r4gi")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Foundations/Spades"]
 shape = SubResource("RectangleShape2D_jhx03")
 
-[node name="Clubs" type="Area2D" parent="Foundations"]
+[node name="Clubs" type="Area2D" parent="Foundations" groups=["Foundation"]]
 position = Vector2(296, 24)
 
 [node name="Sprite2D" type="Sprite2D" parent="Foundations/Clubs"]
@@ -45,7 +45,7 @@ texture = ExtResource("6_w7kh3")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Foundations/Clubs"]
 shape = SubResource("RectangleShape2D_jhx03")
 
-[node name="Hearts" type="Area2D" parent="Foundations"]
+[node name="Hearts" type="Area2D" parent="Foundations" groups=["Foundation"]]
 position = Vector2(328, 24)
 
 [node name="Sprite2D" type="Sprite2D" parent="Foundations/Hearts"]
@@ -55,7 +55,7 @@ texture = ExtResource("7_e3hyu")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Foundations/Hearts"]
 shape = SubResource("RectangleShape2D_jhx03")
 
-[node name="Diamonds" type="Area2D" parent="Foundations"]
+[node name="Diamonds" type="Area2D" parent="Foundations" groups=["Foundation"]]
 position = Vector2(360, 24)
 
 [node name="Sprite2D" type="Sprite2D" parent="Foundations/Diamonds"]
