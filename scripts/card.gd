@@ -9,10 +9,11 @@ signal entered_tableau
 enum CardColor { RED, BLACK }
 enum CardSuit { HEARTS, DIAMONDS, SPADES, CLUBS }
 enum CardRank {
+	INVALID = 0,
 	A = 1,
-	TWO,
-	THREE,
-	FOUR,
+	TWO, # You don't need to explicitly define the values of each enum
+	THREE, # as Godot does it for you. Try it yourself in func _ready()
+	FOUR, # Just paste print("CardRank.TWO value:", CardRank.TWO)
 	FIVE,
 	SIX,
 	SEVEN,
@@ -27,7 +28,7 @@ enum CardRank {
 # Variables for card properties
 var suit: CardSuit
 var color: CardColor
-var rank: CardRank
+var rank: CardRank = CardRank.A
 
 # Variables for card movement
 var click_position := Vector2.ZERO
@@ -87,12 +88,12 @@ func pick_up_card(event: InputEvent) -> void:
 	initial_position = global_position
 	var objects_clicked := mouse_raycast(event, 0b1)
 	var colliders := objects_clicked.map(
-		func(dict: Dictionary):
+		func(dict: Dictionary) -> Area2D:
 			return dict.collider
 	)
 	
 	colliders.sort_custom(
-		func(collider_1: Area2D, collider_2: Area2D):
+		func(collider_1: Area2D, collider_2: Area2D) -> bool:
 			return collider_1.z_index < collider_2.z_index
 	)
 	if colliders[-1] == self:
@@ -149,7 +150,7 @@ func set_card_properties(texture_name: String) -> void:
 	var rank_str: String = texture_name.get_slice("_", 2)
 	rank = parse_rank(rank_str)
 	
-	if rank == 100:
+	if rank == CardRank.INVALID:
 		push_error("Invalid rank extracted from texture name: %s" % texture_name)
 		return
 	

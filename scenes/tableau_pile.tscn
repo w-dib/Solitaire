@@ -12,6 +12,7 @@ script = ExtResource("1_hultt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.117647)
+z_index = -1
 texture = ExtResource("1_4su8v")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

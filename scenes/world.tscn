@@ -19,7 +19,7 @@ size = Vector2(20, 28)
 [node name="World" type="Node"]
 
 [node name="Background" type="Sprite2D" parent="."]
-z_index = -1
+z_index = -2
 texture = ExtResource("2_rwgxs")
 centered = false
 metadata/_edit_lock_ = true
@@ -36,6 +36,7 @@ metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Foundations/Spades"]
 modulate = Color(1, 1, 1, 0.392157)
+z_index = -1
 texture = ExtResource("5_7r4gi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Foundations/Spades"]
@@ -50,6 +51,7 @@ metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Foundations/Clubs"]
 modulate = Color(1, 1, 1, 0.392157)
+z_index = -1
 texture = ExtResource("6_w7kh3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Foundations/Clubs"]
@@ -63,6 +65,7 @@ metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Foundations/Hearts"]
 modulate = Color(1, 1, 1, 0.392157)
+z_index = -1
 texture = ExtResource("7_e3hyu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Foundations/Hearts"]
@@ -77,6 +80,7 @@ metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Foundations/Diamonds"]
 modulate = Color(1, 1, 1, 0.392157)
+z_index = -1
 texture = ExtResource("8_q5onr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Foundations/Diamonds"]

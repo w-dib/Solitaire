@@ -8,10 +8,10 @@ var drawpile_z_index := 0
 var all_cards: Array[Card] = []
 
 var foundations: Array = [
-	[],  # Foundation 1
-	[],  # Foundation 2
-	[],  # Foundation 3
-	[]   # Foundation 4
+	[],  # Foundation 1 Hearts
+	[],  # Foundation 2 Diamonds
+	[],  # Foundation 3 Spades
+	[]   # Foundation 4 Clubs
 ]
 
 var tableau_piles: Array = [
