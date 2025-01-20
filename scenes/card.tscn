@@ -10,6 +10,7 @@ size = Vector2(20, 28)
 [node name="Card" type="Area2D" groups=["Card"]]
 collision_mask = 6
 script = ExtResource("1_6u4wf")
+metadata/_edit_group_ = true
 
 [node name="face_down" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -22,5 +23,6 @@ texture = ExtResource("3_ktuci")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_d81rb")
+metadata/_edit_lock_ = true
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]

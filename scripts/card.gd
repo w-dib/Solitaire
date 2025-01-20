@@ -34,6 +34,7 @@ var rank: CardRank = CardRank.A
 var click_position := Vector2.ZERO
 var initial_position := Vector2.ZERO
 var is_dragging := false
+var valid_drop := false
 
 # References to Sprite2D nodes
 @onready var face_down: Sprite2D = %face_down
@@ -109,15 +110,15 @@ func drop_card(event: InputEvent) -> void:
 		if "collider" in first_dict:
 			var collider: Area2D = first_dict["collider"]  # Safely access the collider
 			if collider.is_in_group("Foundation"):
-
+				valid_drop = true
 				entered_foundation.emit(self, collider)
 				
 			#if collider.is_in_group("Tableau"):
 				#valid_drop = true
 				#entered_tableau.emit(self, collider)
-			else:
-				global_position = initial_position
-				initial_position = Vector2.ZERO
+	if not valid_drop:
+		global_position = initial_position
+		initial_position = Vector2.ZERO
 
 func mouse_raycast(event: InputEvent, layer: int) -> Array[Dictionary]:
 	var parameters: PhysicsPointQueryParameters2D = PhysicsPointQueryParameters2D.new()
@@ -148,6 +149,7 @@ func set_card_properties(texture_name: String) -> void:
 	
 	# Extract rank from texture_name
 	var rank_str: String = texture_name.get_slice("_", 2)
+	@warning_ignore("int_as_enum_without_cast")
 	rank = parse_rank(rank_str)
 	
 	if rank == CardRank.INVALID:
