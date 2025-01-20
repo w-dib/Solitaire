@@ -47,11 +47,11 @@ func _on_entered_foundation(card: Card, foundation: Area2D) -> void:
 		# WARNING WARNING WARNING WARNING 
 		
 		# Update foundation array and remove card from previous pile
-		_move_card_to_foundation(card, foundation_index)
+		_move_card_to_foundation_array(card, foundation_index)
 
 		# Snap the card to the foundation
 		card.global_position = global_position
-		card.initial_position = global_position
+		card.initial_position = card.global_position
 		card.valid_drop = false
 		print("Card added to foundation:", card.name)
 
@@ -59,7 +59,7 @@ func _reset_card_position(card: Card) -> void:
 	card.global_position = card.initial_position
 	card.initial_position = Vector2.ZERO
 
-func _move_card_to_foundation(card: Card, foundation_index: int) -> void:
+func _move_card_to_foundation_array(card: Card, foundation_index: int) -> void:
 	# Find the pile the card came from
 	var previous_pile := BoardState.find_pile(card)
 	if previous_pile != "":

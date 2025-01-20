@@ -113,9 +113,9 @@ func drop_card(event: InputEvent) -> void:
 				valid_drop = true
 				entered_foundation.emit(self, collider)
 				
-			#if collider.is_in_group("Tableau"):
-				#valid_drop = true
-				#entered_tableau.emit(self, collider)
+			if collider.is_in_group("Tableau"):
+				valid_drop = true
+				entered_tableau.emit(self, collider)
 	if not valid_drop:
 		global_position = initial_position
 		initial_position = Vector2.ZERO

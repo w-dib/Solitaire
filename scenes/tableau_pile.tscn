@@ -7,7 +7,7 @@
 size = Vector2(20, 28)
 
 [node name="TableauPile" type="Area2D"]
-collision_layer = 2
+collision_layer = 4
 script = ExtResource("1_hultt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
